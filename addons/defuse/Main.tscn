@@ -43,16 +43,16 @@ text = "Bombs exploded:"
 margin_left = 116.0
 margin_right = 132.0
 margin_bottom = 14.0
-text = "31"
+text = "44"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 visible = false
-margin_left = 2906.58
-margin_top = 652.672
-margin_right = 2961.58
-margin_bottom = 707.672
+margin_left = 1256.93
+margin_top = 822.031
+margin_right = 1311.93
+margin_bottom = 877.031
 mouse_default_cursor_shape = 2
 custom_styles/pressed = SubResource( 1 )
 custom_styles/focus = SubResource( 1 )
@@ -68,13 +68,25 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
-[node name="AudioCheckBox" type="CheckBox" parent="."]
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
 margin_top = 36.0
 margin_right = 1024.0
 margin_bottom = 60.0
+
+[node name="AudioCheckBox" type="CheckBox" parent="HBoxContainer3"]
+margin_right = 65.0
+margin_bottom = 24.0
 pressed = true
 text = "Audio"
 
+[node name="Button" type="Button" parent="HBoxContainer3"]
+margin_left = 69.0
+margin_right = 152.0
+margin_bottom = 24.0
+text = "Clear Score"
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 39.1674
+wait_time = 42.2718
 one_shot = true
+
+[connection signal="pressed" from="HBoxContainer3/Button" to="." method="_on_reset_score_pressed"]

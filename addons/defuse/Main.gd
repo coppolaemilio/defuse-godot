@@ -7,6 +7,7 @@ var bomb_size
 var bomb_sprite_index = 0
 var bomb_interval = 5
 var explosion = preload("res://addons/defuse/explosion/Explosion.tscn")
+var defuse_fx = preload("res://addons/defuse/defuse/Defuse.tscn")
 var data = {
 	'score': 0,
 	'fails': 0,
@@ -32,8 +33,8 @@ func _ready():
 	bomb_size = Vector2(55,55) * get_editor_scale()
 	bomb.rect_size = bomb_size
 	
-	$AudioCheckBox.connect('toggled', self, '_on_audio_checkbox_toggled')
-	$AudioCheckBox.pressed = data.audio
+	$HBoxContainer3/AudioCheckBox.connect('toggled', self, '_on_audio_checkbox_toggled')
+	$HBoxContainer3/AudioCheckBox.pressed = data.audio
 	load_data()
 	update_score()
 	$Timer.connect('timeout', self, '_on_timer_timeout')
@@ -49,13 +50,16 @@ func spawn_bomb():
 	bomb.icon = load("res://addons/defuse/bomb-0.png")
 	bomb_sprite_index = 0
 	bomb.visible = true
-	bomb_interval = rng.randf_range(5,60)
+	bomb_interval = rng.randf_range(5,30)
 	new_bomb_position()
 
 
 func defuse_bomb():
 	bomb.visible = false
 	$Timer.start(bomb_interval)
+	var e = defuse_fx.instance()
+	e.global_position = bomb.rect_global_position + (bomb_size / 2)
+	$CanvasLayer.add_child(e)
 
 
 func _on_bomb_pressed():
@@ -68,6 +72,7 @@ func _on_bomb_pressed():
 
 func new_bomb_position():
 	var windows_size = OS.get_window_size()
+	rng.randomize()
 	bomb.rect_global_position = Vector2(
 		rng.randf_range(0, windows_size.x - bomb_size.x),
 		rng.randf_range(0, windows_size.y - bomb_size.y)
@@ -152,3 +157,10 @@ func get_editor_scale() -> float:
 		_scale = 1
 	
 	return _scale
+
+
+func _on_reset_score_pressed():
+	data.score = 0
+	data.fails = 0
+	save_data()
+	update_score()
