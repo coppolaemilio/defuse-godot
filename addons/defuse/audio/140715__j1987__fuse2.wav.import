@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/140715__j1987__fuse2.wav-25a848feb8cbd1a14d738e2dc98e2167.sample"
+
+[deps]
+
+source_file="res://addons/defuse/audio/140715__j1987__fuse2.wav"
+dest_files=[ "res://.import/140715__j1987__fuse2.wav-25a848feb8cbd1a14d738e2dc98e2167.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
